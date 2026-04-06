@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AVP Conecta - Acessos</title>
 
-  <link rel="icon" type="image/png" href="img/avp.png">
+  <link rel="icon" type="image/png" href="img/logo-icon.png">
 
   <style>
     :root {
@@ -15,6 +15,7 @@
       --card-border: rgba(0,0,0,0.08);
       --accent: #FFD700;
       --accent-hover: #FFC107;
+      --header-bg: #ffffff; /* HEADER BRANCO */
     }
 
     body.dark {
@@ -24,6 +25,7 @@
       --card-border: rgba(255,255,255,0.08);
       --accent: #FFD700;
       --accent-hover: #e0b600;
+      --header-bg: #ffffff; /* HEADER CONTINUA BRANCO NO DARK MODE */
     }
 
     body {
@@ -35,7 +37,7 @@
     }
 
     header {
-      background-color: var(--accent);
+      background-color: var(--header-bg);
       padding: 22px;
       display: flex;
       align-items: center;
@@ -73,7 +75,6 @@
       transform: scale(1.15);
     }
 
-    /* Container principal */
     .main {
       display: flex;
       justify-content: center;
@@ -81,7 +82,6 @@
       padding: 60px 20px;
     }
 
-    /* Cards */
     .cards {
       display: flex;
       flex-direction: column;
@@ -146,8 +146,8 @@
 
   <header>
     <div class="logo-area">
-      <img src="img/logo.png" alt="AVP Conecta Logo">
-      <h1></h1>
+      <img src="img/logo-avp.png" alt="AVP Conecta Logo">
+      <h1>AVP Conecta</h1>
     </div>
 
     <div class="theme-toggle" id="themeToggle">🌙</div>
@@ -156,7 +156,6 @@
   <div class="main">
     <div class="cards">
 
-      <!-- CARD 1 - Manuais -->
       <div class="card" onclick="location.href='manuais.html'">
         <div class="card-icon">📘</div>
         <div class="card-title">Manuais</div>
@@ -164,7 +163,6 @@
         <a class="card-btn" href="manuais.html">Acessar</a>
       </div>
 
-      <!-- CARD 2 - Plataforma -->
       <div class="card" onclick="window.open('https://avpconecta.com.br','_blank')">
         <div class="card-icon">🌐</div>
         <div class="card-title">Plataforma</div>
