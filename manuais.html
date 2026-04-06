@@ -7,9 +7,6 @@
 
   <link rel="icon" type="image/png" href="img/avp.png"/>
 
-  <!-- Biblioteca para converter HTML → PDF -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-
   <style>
     :root{
       --bg: #f4f4f4;
@@ -29,7 +26,6 @@
       color: var(--text);
     }
 
-    /* HEADER */
     header {
       background-color: #ffffff;
       color: #000;
@@ -55,7 +51,6 @@
       height: 52px;
     }
 
-    /* BOTÃO VOLTAR */
     .back-btn {
       padding: 9px 14px;
       background-color: var(--accent);
@@ -73,7 +68,6 @@
       transform: translateY(-3px);
     }
 
-    /* GRID DE CARDS */
     .container {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -127,7 +121,6 @@
       transform: translateY(-2px);
     }
 
-    /* MODAL */
     .modal {
       display: none;
       position: fixed;
@@ -177,7 +170,6 @@
 
     .close:hover { color: var(--accent); }
 
-    /* VIDEO RESPONSIVO */
     .video-wrapper {
       position: relative;
       width: 100%;
@@ -212,7 +204,6 @@
 
     .btn-close { background: #eee; }
 
-    /* MOBILE */
     @media (max-width: 600px) {
 
       header {
@@ -270,7 +261,6 @@
 
 <body>
 
-  <!-- HEADER -->
   <header>
     <a class="back-btn" href="index.html">⬅ Voltar</a>
 
@@ -281,7 +271,6 @@
     <img src="img/logo.png" alt="AVP Conecta Logo" />
   </header>
 
-  <!-- GRID DE MANUAIS -->
   <main class="container">
 
     <div class="card">
@@ -289,8 +278,8 @@
       <p>Guia passo a passo para acessar sua conta.</p>
 
       <div style="display:flex; flex-direction:column; gap:10px; margin-top:15px;">
-        <a class="cta" href="manuais/login.html">📘 Acessar Manual</a>
-        <button class="cta" onclick="baixarPDF('manuais/login.html')" style="background:#eaeaea; color:#000;">
+        <a class="cta" href="manuais/login.pdf" target="_blank">📘 Visualizar Manual</a>
+        <button class="cta" onclick="baixarPDF('manuais/login.pdf')" style="background:#eaeaea; color:#000;">
           ⬇ Baixar Manual (PDF)
         </button>
       </div>
@@ -301,8 +290,8 @@
       <p>Como criar e gerenciar eventos.</p>
 
       <div style="display:flex; flex-direction:column; gap:10px; margin-top:15px;">
-        <a class="cta" href="manuais/evento.html">📘 Acessar Manual</a>
-        <button class="cta" onclick="baixarPDF('manuais/evento.html')" style="background:#eaeaea; color:#000;">
+        <a class="cta" href="manuais/evento.pdf" target="_blank">📘 Visualizar Manual</a>
+        <button class="cta" onclick="baixarPDF('manuais/evento.pdf')" style="background:#eaeaea; color:#000;">
           ⬇ Baixar Manual (PDF)
         </button>
       </div>
@@ -313,8 +302,8 @@
       <p>Publicar e visualizar comunicados.</p>
 
       <div style="display:flex; flex-direction:column; gap:10px; margin-top:15px;">
-        <a class="cta" href="manuais/comunicado.html">📘 Acessar Manual</a>
-        <button class="cta" onclick="baixarPDF('manuais/comunicado.html')" style="background:#eaeaea; color:#000;">
+        <a class="cta" href="manuais/comunicado.pdf" target="_blank">📘 Visualizar Manual</a>
+        <button class="cta" onclick="baixarPDF('manuais/comunicado.pdf')" style="background:#eaeaea; color:#000;">
           ⬇ Baixar Manual (PDF)
         </button>
       </div>
@@ -325,8 +314,8 @@
       <p>Editar informações e preferências.</p>
 
       <div style="display:flex; flex-direction:column; gap:10px; margin-top:15px;">
-        <a class="cta" href="manuais/perfil.html">📘 Acessar Manual</a>
-        <button class="cta" onclick="baixarPDF('manuais/perfil.html')" style="background:#eaeaea; color:#000;">
+        <a class="cta" href="manuais/perfil.pdf" target="_blank">📘 Visualizar Manual</a>
+        <button class="cta" onclick="baixarPDF('manuais/perfil.pdf')" style="background:#eaeaea; color:#000;">
           ⬇ Baixar Manual (PDF)
         </button>
       </div>
@@ -337,8 +326,8 @@
       <p>Perguntas frequentes e soluções rápidas.</p>
 
       <div style="display:flex; flex-direction:column; gap:10px; margin-top:15px;">
-        <a class="cta" href="manuais/faq.html">📘 Acessar Manual</a>
-        <button class="cta" onclick="baixarPDF('manuais/faq.html')" style="background:#eaeaea; color:#000;">
+        <a class="cta" href="manuais/faq.pdf" target="_blank">📘 Visualizar Manual</a>
+        <button class="cta" onclick="baixarPDF('manuais/faq.pdf')" style="background:#eaeaea; color:#000;">
           ⬇ Baixar Manual (PDF)
         </button>
       </div>
@@ -425,32 +414,24 @@
 
   <script>
 
-    /* 🔥 CONVERTE O HTML DO MANUAL EM PDF (FUNCIONA EM PC, ANDROID E IPHONE) */
-    async function baixarPDF(caminhoHTML) {
+    /* 🔥 DOWNLOAD UNIVERSAL (PC, ANDROID, IPHONE) */
+    async function baixarPDF(caminho) {
       try {
-        const resposta = await fetch(caminhoHTML);
-        const html = await resposta.text();
+        const resposta = await fetch(caminho);
+        const blob = await resposta.blob();
+        const url = window.URL.createObjectURL(blob);
 
-        const container = document.createElement("div");
-        container.innerHTML = html;
-        container.style.padding = "20px";
-        container.style.background = "#fff";
-        container.style.width = "100%";
-        container.style.maxWidth = "800px";
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = caminho.split("/").pop();
 
-        document.body.appendChild(container);
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
 
-        await html2pdf().from(container).set({
-          margin: 10,
-          filename: caminhoHTML.split("/").pop().replace(".html", ".pdf"),
-          html2canvas: { scale: 2 },
-          jsPDF: { unit: "mm", format: "a4", orientation: "portrait" }
-        }).save();
-
-        document.body.removeChild(container);
-
+        window.URL.revokeObjectURL(url);
       } catch (e) {
-        alert("Erro ao gerar PDF.");
+        alert("Erro ao baixar o arquivo.");
       }
     }
 
