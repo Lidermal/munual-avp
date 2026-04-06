@@ -116,6 +116,7 @@
       border-radius: 8px;
       transition: 0.2s;
       display: inline-block;
+      cursor: pointer;
     }
 
     .cta:hover {
@@ -271,7 +272,7 @@
     <a class="back-btn" href="index.html">⬅ Voltar</a>
 
     <div class="header-center">
-      <h1><strong>Manuais Aluno</strong></h1>
+      <h1>Manuais Aluno</h1>
     </div>
 
     <img src="img/logo.png" alt="AVP Conecta Logo" />
@@ -286,7 +287,7 @@
 
       <div style="display:flex; flex-direction:column; gap:10px; margin-top:15px;">
         <a class="cta" href="login">📘 Acessar Manual</a>
-        <button class="cta" onclick="baixar('manuais/login.pdf')" style="background:#eaeaea; color:#000;">
+        <button class="cta" onclick="baixarPDF('manuais/login.pdf')" style="background:#eaeaea; color:#000;">
           ⬇ Baixar Manual (PDF)
         </button>
       </div>
@@ -298,7 +299,7 @@
 
       <div style="display:flex; flex-direction:column; gap:10px; margin-top:15px;">
         <a class="cta" href="evento">📘 Acessar Manual</a>
-        <button class="cta" onclick="baixar('manuais/evento.pdf')" style="background:#eaeaea; color:#000;">
+        <button class="cta" onclick="baixarPDF('manuais/evento.pdf')" style="background:#eaeaea; color:#000;">
           ⬇ Baixar Manual (PDF)
         </button>
       </div>
@@ -310,7 +311,7 @@
 
       <div style="display:flex; flex-direction:column; gap:10px; margin-top:15px;">
         <a class="cta" href="comunicado">📘 Acessar Manual</a>
-        <button class="cta" onclick="baixar('manuais/comunicado.pdf')" style="background:#eaeaea; color:#000;">
+        <button class="cta" onclick="baixarPDF('manuais/comunicado.pdf')" style="background:#eaeaea; color:#000;">
           ⬇ Baixar Manual (PDF)
         </button>
       </div>
@@ -322,7 +323,7 @@
 
       <div style="display:flex; flex-direction:column; gap:10px; margin-top:15px;">
         <a class="cta" href="perfil">📘 Acessar Manual</a>
-        <button class="cta" onclick="baixar('manuais/perfil.pdf')" style="background:#eaeaea; color:#000;">
+        <button class="cta" onclick="baixarPDF('manuais/perfil.pdf')" style="background:#eaeaea; color:#000;">
           ⬇ Baixar Manual (PDF)
         </button>
       </div>
@@ -334,7 +335,7 @@
 
       <div style="display:flex; flex-direction:column; gap:10px; margin-top:15px;">
         <a class="cta" href="faq.html">📘 Acessar Manual</a>
-        <button class="cta" onclick="baixar('manuais/faq.pdf')" style="background:#eaeaea; color:#000;">
+        <button class="cta" onclick="baixarPDF('manuais/faq.pdf')" style="background:#eaeaea; color:#000;">
           ⬇ Baixar Manual (PDF)
         </button>
       </div>
@@ -420,13 +421,26 @@
   </div>
 
   <script>
-    function baixar(arquivo) {
-      const link = document.createElement("a");
-      link.href = arquivo;
-      link.download = arquivo.split("/").pop();
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
+
+    /* 🔥 DOWNLOAD UNIVERSAL (PC, ANDROID, IPHONE) */
+    async function baixarPDF(caminho) {
+      try {
+        const resposta = await fetch(caminho);
+        const blob = await resposta.blob();
+        const url = window.URL.createObjectURL(blob);
+
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = caminho.split("/").pop();
+
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+
+        window.URL.revokeObjectURL(url);
+      } catch (e) {
+        alert("Erro ao baixar o arquivo.");
+      }
     }
 
     function openModal(id) {
