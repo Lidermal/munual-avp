@@ -7,6 +7,9 @@
 
   <link rel="icon" type="image/png" href="img/avp.png"/>
 
+  <!-- Biblioteca para converter HTML → PDF -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
   <style>
     :root{
       --bg: #f4f4f4;
@@ -272,7 +275,7 @@
     <a class="back-btn" href="index.html">⬅ Voltar</a>
 
     <div class="header-center">
-      <h1>Manuais Aluno</h1>
+      <h1><strong>Manuais Aluno</strong></h1>
     </div>
 
     <img src="img/logo.png" alt="AVP Conecta Logo" />
@@ -286,8 +289,8 @@
       <p>Guia passo a passo para acessar sua conta.</p>
 
       <div style="display:flex; flex-direction:column; gap:10px; margin-top:15px;">
-        <a class="cta" href="login">📘 Acessar Manual</a>
-        <button class="cta" onclick="baixarPDF('manuais/login.pdf')" style="background:#eaeaea; color:#000;">
+        <a class="cta" href="manuais/login.html">📘 Acessar Manual</a>
+        <button class="cta" onclick="converterPDF('manuais/login.html')" style="background:#eaeaea; color:#000;">
           ⬇ Baixar Manual (PDF)
         </button>
       </div>
@@ -298,8 +301,8 @@
       <p>Como criar e gerenciar eventos.</p>
 
       <div style="display:flex; flex-direction:column; gap:10px; margin-top:15px;">
-        <a class="cta" href="evento">📘 Acessar Manual</a>
-        <button class="cta" onclick="baixarPDF('manuais/evento.pdf')" style="background:#eaeaea; color:#000;">
+        <a class="cta" href="manuais/evento.html">📘 Acessar Manual</a>
+        <button class="cta" onclick="converterPDF('manuais/evento.html')" style="background:#eaeaea; color:#000;">
           ⬇ Baixar Manual (PDF)
         </button>
       </div>
@@ -310,8 +313,8 @@
       <p>Publicar e visualizar comunicados.</p>
 
       <div style="display:flex; flex-direction:column; gap:10px; margin-top:15px;">
-        <a class="cta" href="comunicado">📘 Acessar Manual</a>
-        <button class="cta" onclick="baixarPDF('manuais/comunicado.pdf')" style="background:#eaeaea; color:#000;">
+        <a class="cta" href="manuais/comunicado.html">📘 Acessar Manual</a>
+        <button class="cta" onclick="converterPDF('manuais/comunicado.html')" style="background:#eaeaea; color:#000;">
           ⬇ Baixar Manual (PDF)
         </button>
       </div>
@@ -322,8 +325,8 @@
       <p>Editar informações e preferências.</p>
 
       <div style="display:flex; flex-direction:column; gap:10px; margin-top:15px;">
-        <a class="cta" href="perfil">📘 Acessar Manual</a>
-        <button class="cta" onclick="baixarPDF('manuais/perfil.pdf')" style="background:#eaeaea; color:#000;">
+        <a class="cta" href="manuais/perfil.html">📘 Acessar Manual</a>
+        <button class="cta" onclick="converterPDF('manuais/perfil.html')" style="background:#eaeaea; color:#000;">
           ⬇ Baixar Manual (PDF)
         </button>
       </div>
@@ -334,8 +337,8 @@
       <p>Perguntas frequentes e soluções rápidas.</p>
 
       <div style="display:flex; flex-direction:column; gap:10px; margin-top:15px;">
-        <a class="cta" href="faq.html">📘 Acessar Manual</a>
-        <button class="cta" onclick="baixarPDF('manuais/faq.pdf')" style="background:#eaeaea; color:#000;">
+        <a class="cta" href="manuais/faq.html">📘 Acessar Manual</a>
+        <button class="cta" onclick="converterPDF('manuais/faq.html')" style="background:#eaeaea; color:#000;">
           ⬇ Baixar Manual (PDF)
         </button>
       </div>
@@ -422,24 +425,30 @@
 
   <script>
 
-    /* 🔥 DOWNLOAD UNIVERSAL (PC, ANDROID, IPHONE) */
-    async function baixarPDF(caminho) {
+    /* 🔥 CONVERTE QUALQUER HTML EM PDF (PC, ANDROID, IPHONE) */
+    async function converterPDF(caminhoHTML) {
       try {
-        const resposta = await fetch(caminho);
-        const blob = await resposta.blob();
-        const url = window.URL.createObjectURL(blob);
+        const resposta = await fetch(caminhoHTML);
+        const html = await resposta.text();
 
-        const link = document.createElement("a");
-        link.href = url;
-        link.download = caminho.split("/").pop();
+        const elementoTemp = document.createElement("div");
+        elementoTemp.innerHTML = html;
+        document.body.appendChild(elementoTemp);
 
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
+        const opcoes = {
+          margin: 10,
+          filename: caminhoHTML.split("/").pop().replace(".html", ".pdf"),
+          image: { type: 'jpeg', quality: 0.98 },
+          html2canvas: { scale: 2 },
+          jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+        };
 
-        window.URL.revokeObjectURL(url);
+        await html2pdf().set(opcoes).from(elementoTemp).save();
+
+        document.body.removeChild(elementoTemp);
+
       } catch (e) {
-        alert("Erro ao baixar o arquivo.");
+        alert("Erro ao gerar PDF.");
       }
     }
 
