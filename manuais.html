@@ -207,7 +207,6 @@
     }
 
     .btn-close { background: #eee; }
-    .btn-download { background: var(--accent); color:#000; }
 
     /* MOBILE */
     @media (max-width: 600px) {
@@ -240,16 +239,16 @@
       }
 
       .card {
-        padding: 26px;
-        min-height: 160px;
+        padding: 28px;
+        min-height: 170px;
       }
 
       .card h2 {
-        font-size: 1.25rem;
+        font-size: 1.3rem;
       }
 
       .card p {
-        font-size: 1rem;
+        font-size: 1.05rem;
       }
 
       .modal-content {
@@ -272,7 +271,7 @@
     <a class="back-btn" href="index.html">⬅ Voltar</a>
 
     <div class="header-center">
-      <h1>Manuais Aluno</h1>
+      <h1><strong>Manuais Aluno</strong>strong></h1>
     </div>
 
     <img src="img/logo.png" alt="AVP Conecta Logo" />
@@ -284,31 +283,31 @@
     <div class="card" onclick="location.href='login'">
       <h2>Login</h2>
       <p>Guia passo a passo para acessar sua conta.</p>
-      <a class="cta" href="login">Acessar Manual</a>
+      <a class="cta" href="login" download>Baixar Manual</a>
     </div>
 
     <div class="card" onclick="location.href='evento'">
       <h2>Evento</h2>
       <p>Como criar e gerenciar eventos.</p>
-      <a class="cta" href="evento">Acessar Manual</a>
+      <a class="cta" href="evento" download>Baixar Manual</a>
     </div>
 
     <div class="card" onclick="location.href='comunicado'">
       <h2>Comunicado</h2>
       <p>Publicar e visualizar comunicados.</p>
-      <a class="cta" href="comunicado">Acessar Manual</a>
+      <a class="cta" href="comunicado" download>Baixar Manual</a>
     </div>
 
     <div class="card" onclick="location.href='perfil'">
       <h2>Perfil</h2>
       <p>Editar informações e preferências.</p>
-      <a class="cta" href="perfil">Acessar Manual</a>
+      <a class="cta" href="perfil" download>Baixar Manual</a>
     </div>
 
     <div class="card" onclick="location.href='faq.html'">
       <h2>FAQ</h2>
       <p>Perguntas frequentes e soluções rápidas.</p>
-      <a class="cta" href="faq.html">Acessar Manual</a>
+      <a class="cta" href="faq.html" download>Baixar Manual</a>
     </div>
 
     <!-- CARDS DE VÍDEO -->
@@ -348,7 +347,6 @@
 
       <div class="modal-footer">
         <button class="btn btn-close" onclick="closeModal('loginVideo')">Fechar</button>
-        <a class="btn btn-download" href="videos/login.mp4" download>Baixar</a>
       </div>
     </div>
   </div>
@@ -368,7 +366,6 @@
 
       <div class="modal-footer">
         <button class="btn btn-close" onclick="closeModal('eventoVideo')">Fechar</button>
-        <a class="btn btn-download" href="videos/evento.mp4" download>Baixar</a>
       </div>
     </div>
   </div>
@@ -388,7 +385,6 @@
 
       <div class="modal-footer">
         <button class="btn btn-close" onclick="closeModal('redefinirVideo')">Fechar</button>
-        <a class="btn btn-download" href="videos/redefinir.mp4" download>Baixar</a>
       </div>
     </div>
   </div>
