@@ -118,7 +118,7 @@
       padding: 20px;
       border-radius: 12px;
       width: 90%;
-      max-width: 800px;
+      max-width: 900px;
       text-align: center;
       box-shadow: 0 6px 20px rgba(0,0,0,0.3);
     }
@@ -139,10 +139,22 @@
       color: #FFD700;
     }
 
-    video {
-      width: 100%;
+    /* PLAYER RESPONSIVO */
+    .video-wrapper {
+      position: relative;
+      padding-bottom: 56.25%; /* proporção 16:9 */
+      height: 0;
+      overflow: hidden;
       border-radius: 12px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+
+    .video-wrapper video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
     }
   </style>
 </head>
@@ -151,7 +163,7 @@
 
   <!-- HEADER -->
   <header>
-    <a class="back-btn" href="index.html">⬅ Voltar</a><br>
+    <a class="back-btn" href="index.html">⬅ Voltar</a>
     <h1>Manuais AVP Conecta</h1>
     <img src="img/logo.png" alt="AVP Conecta Logo">
   </header>
@@ -207,10 +219,12 @@
     <div class="modal-content">
       <span class="close" onclick="closeModal('loginVideo')">&times;</span>
       <h3>Vídeo - Login</h3>
-      <video controls>
-        <source src="videos/login.mp4" type="video/mp4">
-        Seu navegador não suporta vídeos HTML5.
-      </video>
+      <div class="video-wrapper">
+        <video controls>
+          <source src="videos/login.mp4" type="video/mp4">
+          Seu navegador não suporta vídeos HTML5.
+        </video>
+      </div>
     </div>
   </div>
 
@@ -218,10 +232,12 @@
     <div class="modal-content">
       <span class="close" onclick="closeModal('eventoVideo')">&times;</span>
       <h3>Vídeo - Evento</h3>
-      <video controls>
-        <source src="videos/evento.mp4" type="video/mp4">
-        Seu navegador não suporta vídeos HTML5.
-      </video>
+      <div class="video-wrapper">
+        <video controls>
+          <source src="videos/evento.mp4" type="video/mp4">
+          Seu navegador não suporta vídeos HTML5.
+        </video>
+      </div>
     </div>
   </div>
 
@@ -229,10 +245,12 @@
     <div class="modal-content">
       <span class="close" onclick="closeModal('comunicadoVideo')">&times;</span>
       <h3>Vídeo - Comunicado</h3>
-      <video controls>
-        <source src="videos/comunicado.mp4" type="video/mp4">
-        Seu navegador não suporta vídeos HTML5.
-      </video>
+      <div class="video-wrapper">
+        <video controls>
+          <source src="videos/comunicado.mp4" type="video/mp4">
+          Seu navegador não suporta vídeos HTML5.
+        </video>
+      </div>
     </div>
   </div>
 
