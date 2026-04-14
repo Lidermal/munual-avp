@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Vídeos Instrutivos - AVP Conecta</title>
+  <link rel="icon" type="image/png" href="img/avp.png"/>
+  <style>
+    body { font-family: 'Segoe UI', Arial, sans-serif; margin:0; background:#f4f4f4; }
+    header { background:#fff; padding:18px; display:flex; justify-content:space-between; align-items:center; box-shadow:0 3px 10px rgba(0,0,0,0.12);}
+    header h1 { margin:0; font-size:1.3rem; }
+    .back-btn { background:#FFD700; padding:8px 12px; border-radius:8px; text-decoration:none; font-weight:700; color:#000; }
+    .container { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:22px; padding:36px; max-width:1200px; margin:0 auto; }
+    .card { background:#fff; border-radius:12px; box-shadow:0 6px 18px rgba(0,0,0,0.12); padding:20px; text-align:center; }
+    .card h2 { margin-bottom:12px; }
+    video { width:100%; border-radius:8px; }
+  </style>
+</head>
+<body>
+  <header>
+    <a class="back-btn" href="index.html">⬅ Voltar</a>
+    <h1>Vídeos Instrutivos</h1>
+    <img src="img/logo.png" alt="AVP Conecta Logo" height="52"/>
+  </header>
+
+  <main class="container">
+    <div class="card">
+      <h2>Login</h2>
+      <video controls>
+        <source src="videos/login.mp4" type="video/mp4">
+      </video>
+    </div>
+
+    <div class="card">
+      <h2>Evento</h2>
+      <video controls>
+        <source src="videos/evento.mp4" type="video/mp4">
+      </video>
+    </div>
+
+    <div class="card">
+      <h2>Redefinir Senha</h2>
+      <video controls>
+        <source src="videos/redefinir.mp4" type="video/mp4">
+      </video>
+    </div>
+  </main>
+</body>
+</html>
